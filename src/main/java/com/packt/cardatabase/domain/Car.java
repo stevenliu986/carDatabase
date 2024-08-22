@@ -18,7 +18,7 @@ public class Car {
     private String brand, model, color, registrationNumber;
     private int modelYear, price;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
+    @JoinColumn(name = "owner")
     private Owner owner;
 
     public Car() {
