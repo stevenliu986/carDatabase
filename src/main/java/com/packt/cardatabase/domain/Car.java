@@ -1,9 +1,6 @@
 package com.packt.cardatabase.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 /**
  * ClassName: Car
@@ -20,6 +17,9 @@ public class Car {
     private Long id;
     private String brand, model, color, registrationNumber;
     private int modelYear, price;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
+    private Owner owner;
 
     public Car() {
     }
@@ -29,7 +29,8 @@ public class Car {
                String color,
                String registrationNumber,
                int modelYear,
-               int price) {
+               int price,
+               Owner owner) {
         super();
         this.brand = brand;
         this.model = model;
@@ -37,6 +38,7 @@ public class Car {
         this.registrationNumber = registrationNumber;
         this.modelYear = modelYear;
         this.price = price;
+        this.owner = owner;
     }
 
     public Long getId() {
@@ -57,5 +59,13 @@ public class Car {
 
     public void setModel(String model) {
         this.model = model;
+    }
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
     }
 }
